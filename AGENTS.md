@@ -182,3 +182,22 @@ everywhere else refers to it with `<see cref="..."/>`. Repeating an argument acr
 DRY violation in prose, and every copy can drift out of step with the others.
 
 State the non-obvious why, then stop.
+
+## Workflow
+
+- Jira: none (no issue per change; branches and PR titles carry no key).
+- Confluence: none.
+- Rovo Dev review: off (no Jira project) (checked 2026-11-07).
+- guarded-coder: not registered.
+- PR gate: listed (`~/.config/pr-gate/repos.txt`, 2026-11-18 on Michael's word: "i want this on for all
+  my repos"); ruleset `main: quorum verdict required` on the default branch (admin bypass); self-merge;
+  no `.pr-gate.toml`.
+- PR flow: open PRs as drafts against the default branch. Every 10 minutes the gate asks Quorum
+  (`pull_merge`) about each one. A pass merges it (squash). Findings put it back in draft for its author:
+  check each finding against the code, then fix and push (the gate rechecks the new head, and a pass then
+  merges with no further word), or, on Michael's word for that PR, `gh pr ready` to accept the open
+  findings as they stand. Mark a draft ready once the checks pass and your own review is clean. The gate
+  never merges a PR touching `AGENTS.md`, CI workflows or dependency files: those are Michael's hand merge.
+  When Michael puts a PR on hold: no push and no ready mark until he lifts it; the label `hold` makes the
+  gate skip it.
+- Status: none yet (no status file).
